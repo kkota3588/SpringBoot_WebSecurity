@@ -27,7 +27,7 @@ import com.mongodb.client.MongoDatabase;
 
 @EnableAutoConfiguration
 @RestController
-@Component
+//@Component
 public class Controller {
 	@Autowired
 	private Response response;

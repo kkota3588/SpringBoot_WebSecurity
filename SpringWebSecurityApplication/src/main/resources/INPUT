@@ -7,11 +7,20 @@ EX:
 }
 
 
-
 ..............................................
 retrive() Request(GET Request):
  EX:
 /retrive/123
+
+
+
+..............................................
+
+
+delete() Request(GET Request):
+ EX:
+/delete/123
+
 
 
 

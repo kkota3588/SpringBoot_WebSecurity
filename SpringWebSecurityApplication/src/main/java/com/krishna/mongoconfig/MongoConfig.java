@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 @Configuration
-@Component
+//@Component
 public class MongoConfig {
 	@Value("${mongodb.url:#{null}}")
 	private String MONGO_URL;
