@@ -108,6 +108,34 @@ public class Controller {
 
 	}
 
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Response> delete(@PathVariable String id) throws Exception {
+		MongoCollection<Document> coll = getMongoCollection();
+		Document query = new Document("_id", id);
+		FindIterable<Document> cursor = coll.find(query);
+		MongoCursor<Document> mongoCursor = cursor.iterator();
+
+		if (mongoCursor.hasNext() == false) {
+			response.setId(id);
+			response.setDesc("Specific id is not there");
+			return new ResponseEntity<Response>(response, HttpStatus.OK);
+		} else {
+			Document query1 = new Document();
+			try {
+				while (mongoCursor.hasNext()) {
+					query1 = mongoCursor.next();
+					coll.deleteOne(query1);
+				}
+			} finally {
+				mongoCursor.close();
+			}
+			response.setId(id);
+			response.setDesc("Delete the data with specific id successfully");
+
+			return new ResponseEntity<Response>(response, HttpStatus.OK);
+		}
+	}
+
 	@RequestMapping(value = "/showAll", method = RequestMethod.GET)
 	public ResponseEntity<Response> show() throws Exception {
 		MongoCollection<Document> coll = getMongoCollection();
