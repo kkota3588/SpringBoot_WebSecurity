@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -85,8 +86,33 @@ public class Controller {
 
 	}
 
-	@RequestMapping(value = "/showAll", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response> show(@RequestBody String value) throws Exception {
+	@RequestMapping(value = "/retrive/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Response> retrive(@PathVariable String id) throws Exception {
+		MongoCollection<Document> coll = getMongoCollection();
+		Document query = new Document("_id", id);
+		FindIterable<Document> cursor = coll.find(query);
+		MongoCursor<Document> mongoCursor = cursor.iterator();
+
+		List<Document> listOfdoc = new ArrayList<Document>();
+
+		Document query1 = new Document();
+		try {
+			while (mongoCursor.hasNext()) {
+				query1 = mongoCursor.next();
+				listOfdoc.add(query1);
+			}
+		} finally {
+			mongoCursor.close();
+		}
+		response.setData(listOfdoc);
+		response.setDesc("Retrive the data successfully");
+
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/showAll", method = RequestMethod.GET)
+	public ResponseEntity<Response> show() throws Exception {
 		MongoCollection<Document> coll = getMongoCollection();
 		FindIterable<Document> fi = coll.find();
 		MongoCursor<Document> cursor = fi.iterator();

@@ -1,5 +1,5 @@
-insert() Request:
-
+insert() Request (POST Request):
+EX:
 {
   "id": "123",
   "name": "krishna",
@@ -7,13 +7,19 @@ insert() Request:
 }
 
 
+
+..............................................
+retrive() Request(GET Request):
+ EX:
+/retrive/123
+
+
+
 ..............................................
 
 
-showAll() Request:
+showAll() Request (GET Request):
 
-{
-	"name": "showall"
-}
+/showAll
 
 ...............................................
