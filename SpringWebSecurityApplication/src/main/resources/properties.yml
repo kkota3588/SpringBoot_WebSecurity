@@ -14,5 +14,15 @@ mongodb:
   #collection name
   collectionname: metadata
   
-#imdg.file.path: src/main/resources/hazelcast.xml
+imdg.file.path: src/main/resources/hazelcast.xml
 #D://MYAPPLICATIONS//hazelcast-3.11//bin//hazelcast.xml
+swagger:
+  contactName: 'Web_App'
+  contactUrl: 'https://localhost:8089'
+  contactEmail: kotakrishnamca@gmail.com
+  title: 'Sample_Web_Application'
+  description: 'Sample springboot web security applocation'
+  license: 1.0
+  licenseUrl: 'http://unlicense.org'
+  version: 1.0
+  basePackage: com.krishna

@@ -1,5 +1,6 @@
 package com.krishna.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.bson.Document;
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Component
-public class Response {
+public class Response implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	String id;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
@@ -19,6 +22,13 @@ public class Response {
 	String desc;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	List<Document> data;
+	public List<Document> getData() {
+		return data;
+	}
+
+	public void setData(List<Document> data) {
+		this.data = data;
+	}
 
 	public String getId() {
 		return id;
@@ -50,14 +60,6 @@ public class Response {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
-	}
-
-	public List<Document> getData() {
-		return data;
-	}
-
-	public void setData(List<Document> data) {
-		this.data = data;
 	}
 
 }
